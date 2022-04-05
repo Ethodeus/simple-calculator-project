@@ -53,11 +53,11 @@ h1 {
 
 button {
 	height: 80px;
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: rgba(255, 255, 255, 0.7);
 	font-size: 2rem;
 	color: black;
 	flex: 1 0 25%;
-	border: 2px white solid;
+	border: 1px white solid;
 	font-weight: 700;
 }
 
