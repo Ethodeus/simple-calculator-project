@@ -42,6 +42,7 @@ const calculator = {
 				} else {
 					this.addText(value);
 				}
+				break;
 			default:
 				this.addText(value);
 				break;
