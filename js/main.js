@@ -14,13 +14,16 @@
 
 const keys = document.querySelector('.buttons');
 keys.addEventListener('click', (event) => {
-	const { target } = event;
-	const { value } = target;
+	//prettier-ignore
+	const {target, target: { value }} = event;
+	console.log(event);
+	console.log(event.target);
+	console.log(value);
 	//if target is not a button element
 	if (!target.matches('button')) {
-		return; //we return nothing
+		return; //we return nothing, stp the function and start over
 	} else {
-		calculator.parseInput(value);
+		calculator.parseInput(value); //otherwise, we input the value.
 	}
 });
 
@@ -57,7 +60,7 @@ const calculator = {
 			this.prevTotal = null;
 		}
 
-		if (isNaN(+value) && isNaN(+this.displayText)) {
+		if (isNaN(Number(value)) && isNaN(Number(this.displayText))) {
 			if (isNaN(this.displayText.slice(-1))) {
 				return;
 			}

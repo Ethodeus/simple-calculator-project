@@ -12,10 +12,12 @@ body {
 }
 
 h1 {
-	text-align: center;
-	padding-top: 8rem;
 	font-size: 1.5rem;
 	color: white;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 10px;
 }
 
 .calculator {
