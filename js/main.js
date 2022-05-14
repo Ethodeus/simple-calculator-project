@@ -15,7 +15,7 @@
 const keys = document.querySelector('.buttons');
 keys.addEventListener('click', (event) => {
 	//prettier-ignore
-	const {target, target: { value }} = event;
+	const { target, target: { value } } = event;
 	console.log(event);
 	console.log(event.target);
 	console.log(value);
@@ -30,6 +30,7 @@ keys.addEventListener('click', (event) => {
 const calculator = {
 	displayText: '0',
 	prevTotal: null,
+	decimalInNumber: false,
 
 	parseInput(value) {
 		switch (value) {
@@ -39,11 +40,24 @@ const calculator = {
 			case 'AC':
 				this.clearAll();
 				break;
+			case "-":
+			case "+":
+			case "*":
+			case "/":
+				this.decimalInNumber = false
+				this.addText(value);
+				break;
 			case '.':
-				if (this.displayText == '0') {
-					this.addText('0.');
+				if (!this.decimalInNumber) {
+					console.log('no decimal')
+					if (this.displayText == '0') {
+						this.addText('0.');
+					} else {
+						this.addText(value);
+					}
+					this.decimalInNumber = !this.decimalInNumber
 				} else {
-					this.addText(value);
+					console.log('decimal in number oh no')
 				}
 				break;
 			default:
@@ -78,13 +92,29 @@ const calculator = {
 
 	calcAnswer(equation) {
 		let result = Function('return ' + equation)();
-		this.outputText(result);
-		this.displayText = result;
+		const resultRounded = this.roundAnswers(result)
+		this.outputText(resultRounded);
+		this.displayText = resultRounded;
+		console.log({ result })
+		console.log(Number.isInteger(resultRounded), 'is integer')
+		if (Number.isInteger(resultRounded)) {
+			this.decimalInNumber = false
+		} else {
+			this.decimalInNumber = true
+		}
+	},
+
+	roundAnswers(result) {
+		//round number to 3 decimal places
+		const resultRounded = Number(result).toFixed(3)
+		//convert to number to get rid of trailing 0s
+		return Number(resultRounded)
 	},
 
 	clearAll() {
 		this.displayText = '0';
 		this.prevTotal = null;
 		this.outputText(this.displayText);
+		this.decimalInNumber = false
 	},
 };
