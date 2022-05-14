@@ -95,8 +95,6 @@ const calculator = {
 		const resultRounded = this.roundAnswers(result)
 		this.outputText(resultRounded);
 		this.displayText = resultRounded;
-		console.log({ result })
-		console.log(Number.isInteger(resultRounded), 'is integer')
 		if (Number.isInteger(resultRounded)) {
 			this.decimalInNumber = false
 		} else {
